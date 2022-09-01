@@ -31,5 +31,10 @@
     "ecmaFeatures": {
       "modules": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["server/**/*.js", "client/**/*.js"]
+    }
+  ]
 }
