@@ -1,8 +1,8 @@
-import {Button, Card, Input, Loading, Row, Text} from "@nextui-org/react";
-import {useState} from "react";
+import { Button, Card, Input, Loading, Row, Text } from "@nextui-org/react";
+import { useState } from "react";
 
-const AdminLogin = ({setType}) => {
-    const [form, setForm] = useState({login: '', password: '', role: 'ADMIN'});
+const AdminLogin = ({ setType }) => {
+    const [form, setForm] = useState({ login: '', password: '', role: 'ADMIN' });
     const [isLoading, setIsLoading] = useState(false);
 
     const handle = {
@@ -11,7 +11,7 @@ const AdminLogin = ({setType}) => {
             setType('admin_dashboard');
         },
         change: (value, key) => {
-            setForm({...form, [key]: value});
+            setForm({ ...form, [key]: value });
         },
     }
     return (
@@ -52,3 +52,13 @@ const AdminLogin = ({setType}) => {
 
 
 export default AdminLogin;
+
+
+export async function getStaticProps(context) {
+    return {
+        props: {
+            protected: true,
+            role: "ADMIN",
+        },
+    }
+}

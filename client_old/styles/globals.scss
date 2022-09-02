@@ -1,4 +1,6 @@
 @import "admin";
+@import "store";
+
 html,
 body {
   padding: 0;
@@ -20,8 +22,29 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
+  }
+}
+
+
+.notFound {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    cursor: pointer;
   }
 }

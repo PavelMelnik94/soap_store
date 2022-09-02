@@ -13,11 +13,15 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html lang="en">
-                <Head>{CssBaseline.flush()}</Head>
+            <Html lang="ru">
+                <Head>
+                    {CssBaseline.flush()}
+                    <script defer src="https://unpkg.com/swiper/swiper-bundle.min.js" type="text/javascript"></script>
+                    <script defer src="../scripts/index.js" type="text/javascript"></script>
+                </Head>
                 <body>
-                <Main />
-                <NextScript />
+                    <Main />
+                    <NextScript />
                 </body>
             </Html>
         );
