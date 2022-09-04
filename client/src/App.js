@@ -14,16 +14,13 @@ function App() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-       setTimeout(() => {
-           check().then(data => {
-               user.setUser(true)
-               user.setIsAuth(true)
-           } ).finally(() => setLoading(false))
-       }, 2000)
+        check().then(data => {
+            // user.setUser(true)
+            user.setIsAuth(true)
+        } ).finally(() => setLoading(false))
     }, [])
 
     if (loading) {
-        console.log('loading')
         return (
             <div style={{width: '100%', height: '100vh'}} className="d-flex justify-content-center align-items-center">
                 <Spinner animation="grow" />

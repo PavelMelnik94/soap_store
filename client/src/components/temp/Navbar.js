@@ -14,6 +14,12 @@ const {user} = useContext(Context)
 
     const history = useHistory();
 
+const logOut = () => {
+        user.setUser({});
+        user.setIsAuth(false)
+        return null;
+    };
+
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -23,11 +29,11 @@ const {user} = useContext(Context)
                 {user.isAuth ?
                     <Nav className="ml-auto">
                         <Button  onClick={() => history.push(ADMIN_ROUTE)}>Админ панель</Button>
-                        <Button onClick={() => history.push(LOGIN_ROUTE)} style={{marginLeft: "5px"}} >выйти</Button>
+                        <Button onClick={() => logOut()} style={{marginLeft: "5px"}} >выйти</Button>
                     </Nav>
                 :
                     <Nav className="ml-auto">
-                        <Button onClick={() => user.setIsAuth(!user.isAuth)}  >Авторизация</Button>
+                        <Button onClick={() => history.push(LOGIN_ROUTE)}  >Авторизация</Button>
                     </Nav>}
             </Container>
         </Navbar>
