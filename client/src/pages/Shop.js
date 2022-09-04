@@ -6,29 +6,41 @@ import DeviceList from "../components/temp/DeviceList";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {fetchBrands, fetchDevices, fetchTypes} from "../http/deviceApi";
+import Pages from "../components/temp/Pages";
 
-const Shop = () => {
-
-    const {device} = useContext(Context);
+const Shop = observer(() => {
+    const {device} = useContext(Context)
 
     useEffect(() => {
         fetchTypes().then(data => device.setTypes(data))
         fetchBrands().then(data => device.setBrands(data))
-        fetchDevices().then(data => device.setDevices(data.rows))
+        fetchDevices(null, null, 1, 2).then(data => {
+            device.setDevices(data.rows)
+            device.setTotalCount(data.count)
+        })
     }, [])
 
+    useEffect(() => {
+        fetchDevices(device.selectedType.id, device.selectedBrand.id, device.page, 2).then(data => {
+            device.setDevices(data.rows)
+            device.setTotalCount(data.count)
+        })
+    }, [device.page, device.selectedType, device.selectedBrand,])
+
     return (
-       <Container>
-           <Row className="mt-2">
-                <Col  sm={5} md={4} lg={3}><TypeBar /></Col>
-               <Col  sm={7} md={8} lg={9}>
-                   <BrandBar />
+        <Container>
+            <Row className="mt-2">
+                <Col md={3}>
+                    <TypeBar/>
+                </Col>
+                <Col md={9}>
+                    <BrandBar/>
+                    <DeviceList/>
+                    <Pages/>
+                </Col>
+            </Row>
+        </Container>
+    );
+});
 
-                   <DeviceList/>
-               </Col>
-           </Row>
-       </Container>
-    )
-}
-
-export default observer(Shop);
+export default Shop;
