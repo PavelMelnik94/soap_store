@@ -1,11 +1,18 @@
 import {observer} from "mobx-react-lite";
 import {Button, Form, Modal} from "react-bootstrap";
-import {useContext} from "react";
-import {Context} from "../../../index";
+import {useState} from "react";
+import {createBrand} from "../../../http/deviceApi";
 
 const CreateBrand = ({show, onHide}) => {
 
-    const {device} = useContext(Context);
+    const [value, setValue] = useState('');
+
+    const addBrand = () => {
+        createBrand({name: value}).then(data => {
+            setValue('')
+            onHide();
+        })
+    }
 
     return (
         <Modal
@@ -22,13 +29,15 @@ const CreateBrand = ({show, onHide}) => {
             <Modal.Body>
                 <Form>
                     <Form.Control
+                        value={value}
+                        onChange={e => setValue(e.target.value)}
                         placeholder="введите название бренда"
                     />
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-danger" onClick={() => onHide()}>Закрыть</Button>
-                <Button variant="outline-success" onClick={() => onHide()}>Добавить</Button>
+                <Button variant="outline-success" onClick={() => addBrand()}>Добавить</Button>
             </Modal.Footer>
         </Modal>
     )

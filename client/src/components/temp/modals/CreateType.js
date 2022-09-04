@@ -1,11 +1,17 @@
-import {observer} from "mobx-react-lite";
 import {Button, Form, Modal} from "react-bootstrap";
-import {useContext} from "react";
-import {Context} from "../../../index";
+import { useState} from "react";
+import {createType} from "../../../http/deviceApi";
 
 const CreateType = ({show, onHide}) => {
-    const {device} = useContext(Context);
 
+    const [value, setValue] = useState('');
+
+    const addType = () => {
+        createType({name: value}).then(data => {
+            setValue('')
+            onHide();
+        })
+    }
     return (
         <Modal
             show={show}
@@ -22,15 +28,17 @@ const CreateType = ({show, onHide}) => {
                 <Form>
                     <Form.Control
                         placeholder="введите название типа"
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
                     />
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-danger" onClick={() => onHide()}>Закрыть</Button>
-                <Button variant="outline-success" onClick={() => onHide()}>Добавить</Button>
+                <Button variant="outline-success" onClick={addType}>Добавить</Button>
             </Modal.Footer>
         </Modal>
     )
 };
 
-export default observer(CreateType);
+export default CreateType;

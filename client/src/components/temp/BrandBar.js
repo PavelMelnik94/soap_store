@@ -13,7 +13,7 @@ const BrandBar = () => {
                             border={brand.id === device.selectedBrand.id ? 'danger' : false}
                             onClick={() => device?.setSelectedBrand(brand)}
                             key={brand.id}
-                            className={`p-3 ${i !== device?.brands.length -1 && 'me-2'}`}
+                            className={`p-1 ${i !== device?.brands.length -1 && 'me-2'}`}
                             style={{width: 'fit-content', cursor: "pointer"}}
                         >
                             {brand.name}
