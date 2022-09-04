@@ -1,22 +1,21 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
 import {BsStar} from 'react-icons/bs'
+import {useParams} from 'react-router-dom';
+import {fetchOneDevice} from "../http/deviceApi";
+
 const DevicePage = () => {
+    const [device, setDevice] = useState({info: []});
+    const {id} = useParams();
 
-    const device = {id: 1, brand: 'samsung', name: 'iphone', price: 25800, rating: 3, img: 'https://images.unsplash.com/photo-1662142935529-2cc58bc313f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60'};
-
-    const decription = [
-        {id: 1, title: 'оперативная память', description: "5 гб"},
-        {id: 2, title: 'оперативная память', description: "5 гб"},
-        {id: 3, title: 'оперативная память', description: "5 гб"},
-        {id: 4, title: 'оперативная память', description: "5 гб"},
-        {id: 5, title: 'оперативная память', description: "5 гб"},
-    ];
+    useEffect(() => {
+        fetchOneDevice(id).then(data => setDevice(data))
+    }, [id])
         return (
         <Container className={'mt-3'}>
                 <Row>
                     <Col md={4}>
-                        <Image width={'100%'} height={'100%'} src={device.img}/>
+                        <Image width={'100%'} height={'100%'} src={process.env.REACT_APP_API_URL + device.img}/>
                     </Col>
                     <Col md={4}>
                         <h2>{device.name}</h2>
@@ -31,7 +30,7 @@ const DevicePage = () => {
 
                         <div className="pe-2 ps-2 mt-2">
                             <div>Характеристики:</div>
-                            {decription.map(info =>
+                            {device.info.map(info =>
                                 <Row key={info.id}>
                                     {info.title}: {info.description}
                                 </Row>

@@ -9,7 +9,7 @@ const DeviceList = () => {
     const {device} = useContext(Context)
     return (
         <Row className='mt-3 d-flex'>
-            {device?.devices.map(item =>
+            {device?.devices?.map(item =>
                 <DeviceItem key={item.id} device={item} />
             )}
         </Row>

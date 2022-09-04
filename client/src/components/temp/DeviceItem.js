@@ -20,7 +20,7 @@ const DeviceItem = ({device}) => {
                 key={id}
                 style={{width: "100%", cursor: "pointer"}}
             >
-                <Image style={{borderTopLeftRadius: "5px",borderTopRightRadius: "5px", }} width={'100%'} height={'100%'} src={img} />
+                <Image style={{borderTopLeftRadius: "5px",borderTopRightRadius: "5px", }} width={'100%'} height={'100%'} src={process.env.REACT_APP_API_URL + img} />
                <div className="ps-1 pe-1 mt-1">
 
                    <div className="d-flex justify-content-between align-items-center ">
